@@ -28,6 +28,7 @@ function make_slides(f) {
       } else {
         exp.data_trials.push({
           "trial_type" : "single_trial",
+          "slide_number": exp.phase,
           "response" : response
         });
         exp.go(); //make sure this is at the *end*, after you log your data
@@ -80,6 +81,7 @@ function make_slides(f) {
     log_responses : function() {
       exp.data_trials.push({
         "trial_type" : "one_slider",
+        "slide_number": exp.phase,
         "response" : exp.sliderPost
       });
     }
@@ -142,6 +144,7 @@ function make_slides(f) {
         var sentence_type = this.sentence_types[i];
         exp.data_trials.push({
           "trial_type" : "multi_slider",
+          "slide_number": exp.phase,
           "sentence_type" : sentence_type,
           "response" : exp.sliderPost[i]
         });
@@ -232,6 +235,7 @@ function make_slides(f) {
       for (var i=0; i<this.stim.bins.length; i++) {
         exp.data_trials.push({
           "trial_type" : "vertical_slider",
+          "slide_number": exp.phase,
           "question" : this.stim.question,
           "response" : exp.sliderPost[i],
           "min" : this.stim.bins[i].min,
@@ -298,7 +302,7 @@ function init() {
   //make corresponding slides:
   exp.slides = make_slides(exp);
 
-  //exp.nQs = utils.get_exp_length(); //this does not work if there are stacks of stims (but does work for an experiment with this structure)
+  exp.nQs = utils.get_exp_length(); //this does not work if there are stacks of stims (but does work for an experiment with this structure)
                     //relies on structure and slides being defined
 
   $('.slide').hide(); //hide everything
